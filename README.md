@@ -27,8 +27,24 @@ See [SECURITY.md](SECURITY.md) before sharing logs or reporting a vulnerability.
 ## Requirements
 
 - Node.js 20 or newer.
-- `pdftotext` from Poppler, used to verify the official number and CAE after issuance.
+- `pdftotext` from Poppler when invoices will be issued through the MCP.
 - Google Chrome only if an explicit authentication fallback is enabled.
+
+### Why Poppler is needed
+
+Poppler is not an ARCA requirement and is not needed to authenticate, list invoices or prepare a preview. After `arca_issue_invoice` sends the irreversible issuance request and downloads the official PDF, the MCP runs `pdftotext` to extract and verify the invoice number, CAE and CAE expiration date.
+
+Install Poppler before using the issuance tool:
+
+```bash
+# macOS
+brew install poppler
+
+# Debian / Ubuntu
+sudo apt-get install poppler-utils
+```
+
+If `pdftotext` is unavailable at that point, ARCA may already have issued the invoice even though local verification fails. Do not retry the issuance request: check the invoice through `arca_list_invoices` or RCEL `Consultas` first.
 
 ## Run
 
