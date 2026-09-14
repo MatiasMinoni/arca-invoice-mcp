@@ -1,0 +1,27 @@
+{
+  "name": "arca-invoice-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local MCP server for approval-gated ARCA Factura C issuance",
+  "scripts": {
+    "start": "node src/index.mjs",
+    "check": "node --check src/index.mjs && node --check src/arca-client.mjs",
+    "test": "node --test",
+    "test:mcp": "node test/mcp-smoke.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.0.0",
+    "fetch-cookie": "3.2.0",
+    "iconv-lite": "0.7.2",
+    "playwright-core": "1.63.0",
+    "tough-cookie": "6.0.0",
+    "zod": "4.5.4"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.0.0"
+  }
+}
